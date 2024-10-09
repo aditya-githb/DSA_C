@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    struct node
+    {
+        int data;
+        struct node *next;
+        struct node *prev;
+    };
+
+    struct node *head = NULL, *newnode, *temp;
+    int choice = 1;
+
+    while (choice)
+    {
+        newnode = (struct node *)malloc(sizeof(struct node));
+
+        printf("Enter Data: ");
+        scanf("%d", &newnode->data);
+
+        newnode->next = NULL;
+        newnode->prev = NULL;
+
+        if (head == NULL)
+        {
+            head = temp = newnode;
+        }
+        else
+        {
+            temp->next = newnode;
+            newnode->prev = temp;
+            temp = newnode;
+        }
+
+        printf("Do you want to continue (0,1): ");
+        scanf("%d", &choice);
+    }
+
+    // printing list
+    temp = head;
+    printf("double linked list before insertion at front\n");
+    while (temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+
+    // insertion
+    newnode = (struct node *)malloc(sizeof(struct node));
+
+    printf("\nenter data to insert at front: ");
+    scanf("%d", &newnode->data);
+
+    head->prev = newnode;
+    newnode->next = head;
+    head = newnode;
+
+    // printing list after insertion process
+    temp = head;
+    printf("linked list after insertion at front\n");
+    while (temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+
+    return 0;
+}
